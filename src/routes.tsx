@@ -6,7 +6,7 @@ import Signup from "./pages/signup";
 import CreatePost from "./pages/post";
 import Profile from "./pages/profile";
 import MyPhotos from "./pages/myphotos";
-import ProtectedRoutes from "./components/ui/ProtectedRoutes1";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 export const router = createBrowserRouter([
   {
