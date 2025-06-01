@@ -3,10 +3,10 @@ import Login from "./pages/login";
 import Error from "./pages/error";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
-import CreatePost from "./pages/Post";
+import CreatePost from "./pages/post";
 import Profile from "./pages/profile";
 import MyPhotos from "./pages/myphotos";
-import ProtectedRoutes from "./components/ui/ProtectedRoutes";
+import ProtectedRoutes from "./components/ui/ProtectedRoutes1";
 
 export const router = createBrowserRouter([
   {

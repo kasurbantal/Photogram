@@ -69,7 +69,7 @@ export const UserAuthProvider: React.FunctionComponent<
     // Pasang listener untuk mengecek status login user
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log("The logged in user state is: ", user); // debug
+        console.log("The logged in user state is: ", user); // debug
         setUser(user); // set user jika sedang login
       } else {
         setUser(null); // set null jika logout
