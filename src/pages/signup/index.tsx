@@ -119,10 +119,16 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
             <Button className="w-full" type="submit">
               Create account
             </Button>
-            <p className="mt-3 text-sm text-center">
-              Already have an account? <Link to="login">Login up</Link>
-            </p>
           </CardFooter>
+          <p className="mt-3 text-sm text-center">
+            Already have an account?{" "}
+            <Link
+              to="login"
+              className="bg-gray-700 p-1 text-white text-center rounded-sm"
+            >
+              Login up
+            </Link>
+          </p>
         </form>
       </Card>
     </>
