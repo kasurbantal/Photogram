@@ -60,11 +60,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <div className="grid grid-cols-2 gap-6">
-              <Button variant="outline" onClick={handleGoogleSignIn}>
-                <Icons.gitHub className="mr-2 h-4 w-4" />
-                Github
-              </Button>
+            <div className="grid grid-cols">
               <Button variant="outline">
                 <Icons.google className="mr-2 h-4 w-4" />
                 Google
@@ -103,7 +99,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
                 }
               />
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-2 mb-4">
               <Label htmlFor="confirmpassword">Confirm Password</Label>
               <Input
                 id="confirmpassword"
@@ -121,9 +117,9 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
             </Button>
           </CardFooter>
           <p className="mt-3 text-sm text-center">
-            Already have an account?{" "}
+            Already have an account?
             <Link
-              to="login"
+              to="/login"
               className="bg-gray-700 p-1 text-white text-center rounded-sm"
             >
               Login up
