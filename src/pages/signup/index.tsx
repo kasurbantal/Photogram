@@ -61,7 +61,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
           </CardHeader>
           <CardContent className="grid gap-4">
             <div className="grid grid-cols">
-              <Button variant="outline">
+              <Button variant="outline" onClick={handleGoogleSignIn}>
                 <Icons.google className="mr-2 h-4 w-4" />
                 Google
               </Button>
@@ -113,7 +113,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
           </CardContent>
           <CardFooter>
             <Button className="w-full" type="submit">
-              Create account
+              Sign Up
             </Button>
           </CardFooter>
           <p className="mt-3 text-sm text-center">
@@ -122,7 +122,7 @@ const Signup: React.FunctionComponent<ISignupProps> = () => {
               to="/login"
               className="bg-gray-700 p-1 text-white text-center rounded-sm"
             >
-              Login up
+              Login
             </Link>
           </p>
         </form>

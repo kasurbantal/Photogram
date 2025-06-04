@@ -62,7 +62,7 @@ const Login: React.FunctionComponent<ILoginProps> = () => {
           </CardHeader>
           <CardContent className="grid gap-4">
             <div className="grid grid-cols">
-              <Button variant="outline">
+              <Button variant="outline" onClick={handleGoogleSignIn}>
                 <Icons.google className="mr-2 h-4 w-4" />
                 Google
               </Button>
