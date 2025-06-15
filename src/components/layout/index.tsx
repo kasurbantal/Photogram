@@ -1,4 +1,4 @@
-import { Sidebar } from "lucide-react";
+import Sidebar from "../sidebar";
 import UserList from "../userList";
 
 interface ILayoutProps {
