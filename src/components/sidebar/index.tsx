@@ -1,7 +1,7 @@
 import * as React from "react";
-import HomeIcon from "@/assets/icons/home.svg";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { Home, ImagePlus, User, GalleryHorizontal } from "lucide-react";
 
 interface ISidebarProps {}
 
@@ -9,7 +9,22 @@ const navItems = [
   {
     name: "Home",
     link: "/",
-    icon: HomeIcon,
+    icon: Home,
+  },
+  {
+    name: "Post",
+    link: "/post",
+    icon: ImagePlus,
+  },
+  {
+    name: "Profile",
+    link: "/profile",
+    icon: User,
+  },
+  {
+    name: "My Photos",
+    link: "/myphotos",
+    icon: GalleryHorizontal,
   },
 ];
 
@@ -26,22 +41,26 @@ const Sidebar: React.FunctionComponent<ISidebarProps> = () => {
       <div className="flex flex-col space-y-2">
         {navItems.map((item) => {
           const isActive = pathname === item.link;
+          const Icon = item.icon;
 
           return (
             <Link
               to={item.link}
               key={item.name}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-md transition-colors",
+                "group flex items-center gap-3 px-4 py-3 rounded-md transition-colors",
                 isActive
-                  ? "bg-slate-800 text-white"
+                  ? "bg-slate-800 text-white hover:bg-white hover:text-slate-800"
                   : "bg-transparent text-gray-400 hover:bg-slate-700 hover:text-white"
               )}
             >
-              <img
-                src={item.icon}
-                alt={item.name}
-                className={cn("w-5 h-5", isActive ? "invert brightness-0" : "")}
+              <Icon
+                className={cn(
+                  "w-5 h-5 transition-colors",
+                  isActive
+                    ? "text-white group-hover:text-black"
+                    : "text-white group-hover:text-black"
+                )}
               />
               <span className="text-sm font-medium">{item.name}</span>
             </Link>
