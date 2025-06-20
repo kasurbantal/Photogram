@@ -29,40 +29,38 @@ const navItems = [
 ];
 
 const Sidebar: React.FunctionComponent<ISidebarProps> = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
+  const { pathname } = useLocation();
 
   return (
-    <nav className="flex flex-col relative h-screen w-64 bg-[#1E293B] p-4">
+    <nav className="flex flex-col h-screen w-64 bg-[#1E293B] p-4">
       <div className="text-white text-2xl font-semibold mb-8 text-center">
         PhotoGram
       </div>
 
       <div className="flex flex-col space-y-2">
-        {navItems.map((item) => {
-          const isActive = pathname === item.link;
-          const Icon = item.icon;
+        {navItems.map(({ name, link, icon: Icon }) => {
+          const isActive = pathname === link;
 
           return (
             <Link
-              to={item.link}
-              key={item.name}
+              to={link}
+              key={name}
               className={cn(
                 "group flex items-center gap-3 px-4 py-3 rounded-md transition-colors",
                 isActive
-                  ? "bg-slate-800 text-white hover:bg-white hover:text-slate-800"
-                  : "bg-transparent text-gray-400 hover:bg-slate-700 hover:text-white"
+                  ? "bg-white text-slate-800"
+                  : "bg-transparent text-white hover:bg-slate-700"
               )}
             >
               <Icon
                 className={cn(
                   "w-5 h-5 transition-colors",
                   isActive
-                    ? "text-white group-hover:text-black"
-                    : "text-white group-hover:text-black"
+                    ? "text-slate-800"
+                    : "text-white group-hover:text-white"
                 )}
               />
-              <span className="text-sm font-medium">{item.name}</span>
+              <span className="text-sm font-medium">{name}</span>
             </Link>
           );
         })}
