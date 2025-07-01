@@ -45,7 +45,7 @@ const FileUploader: React.FC<IFileUploaderProps> = ({
           <div className="relative" key={file.uuid}>
             {file.cdnUrl && (
               <img
-                src={file.cdnUrl}
+                src={`${file.cdnUrl}/-/format/webp/-/quality/smart/-/strecth/fill/`}
                 alt="Preview"
                 className="w-full h-auto rounded"
               />

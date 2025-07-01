@@ -4,12 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useUserAuth } from "@/context/userAuthContext";
-import type { FileEntry, Post } from "@/types";
+import { createPost } from "@/repository/post.service";
+import type { FileEntry, PhotoMeta, Post } from "@/types";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ICreatePostProps {}
 
 const CreatePost: React.FunctionComponent<ICreatePostProps> = () => {
+  const navigate = useNavigate();
   const { user } = useUserAuth();
   const [fileEntry, setFileEntry] = React.useState<FileEntry>({
     files: [],
@@ -28,6 +31,21 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = () => {
     e.preventDefault();
     console.log("Uploaded File Entry: ", fileEntry);
     console.log("The create post is: ", post);
+    const PhotoMeta: PhotoMeta[] = fileEntry.files.map((file) => {
+      return { cdUrl: file.cdnUrl, uuid: file.uuid };
+    });
+    if (user != null) {
+      const newPost: Post = {
+        ...post,
+        userId: user?.uid || null,
+        photos: PhotoMeta,
+      };
+      console.log("The final post is: ", newPost);
+      await createPost(newPost);
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <>
