@@ -7,8 +7,8 @@ import * as React from "react";
 interface IMyPhotosProps {}
 
 const MyPhotos: React.FunctionComponent<IMyPhotosProps> = () => {
-  const { user } = useUserAuth;
-  const { data, setData } = React.useState<DocumentResponse[]>([]);
+  const { user } = useUserAuth();
+  const [data, setData] = React.useState<DocumentResponse[]>([]);
   const getAllPost = async (id: string) => {
     try {
       const querySnapshot = await getPostByUserId(id);
@@ -34,17 +34,20 @@ const MyPhotos: React.FunctionComponent<IMyPhotosProps> = () => {
 
   React.useEffect(() => {
     if (user != null) {
-      getAllPost(user.id);
+      getAllPost(user.uid);
     }
   }, []);
 
   const renderPost = () => {
-    return data.map((item) => {
-      <div key={item.photo[0].uuid} className="relative">
-        {/* <div className="absolute transition-all duration"></div> */}
-        <img src={`${item.photos[0].cdnUrl}/-/progressive/yes/`} />
-      </div>;
-    });
+    return data.map((item) => (
+      <div key={item.photos[0].uuid} className="relative">
+        <img
+          src={`${item.photos[0].cdnUrl}/-/progressive/yes/`}
+          alt="Uploaded"
+          className="w-full h-auto rounded"
+        />
+      </div>
+    ));
   };
 
   return (

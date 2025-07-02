@@ -25,13 +25,13 @@ export interface Post {
 }
 
 export interface PhotoMeta {
-  cdnUrl: string;
-  uuid: string;
+  cdnUrl: string | null;
+  uuid: string | null;
 }
 
 export interface DocumentResponse {
   id: string,
- caption: string;
+  caption: string;
   photos: PhotoMeta[];
   likes: number;
   userlikes: [];

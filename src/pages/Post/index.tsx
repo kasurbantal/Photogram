@@ -32,7 +32,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = () => {
     console.log("Uploaded File Entry: ", fileEntry);
     console.log("The create post is: ", post);
     const PhotoMeta: PhotoMeta[] = fileEntry.files.map((file) => {
-      return { cdUrl: file.cdnUrl, uuid: file.uuid };
+      return { cdnUrl: file.cdnUrl, uuid: file.uuid };
     });
     if (user != null) {
       const newPost: Post = {

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   FileUploaderRegular,
   type OutputFileEntry,
@@ -16,18 +16,27 @@ const FileUploader: React.FC<IFileUploaderProps> = ({
   onChange,
 }) => {
   const uploaderRef = useRef<any>(null);
-  const [uploadedFiles, setUploadedFiles] = useState<OutputFileEntry[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<OutputFileEntry[]>(
+    fileEntry.files || []
+  );
+
+  // Update local state when fileEntry from parent changes (optional sync)
+  useEffect(() => {
+    setUploadedFiles(fileEntry.files || []);
+  }, [fileEntry.files]);
 
   const handleUploadSuccess = (file: OutputFileEntry) => {
-    const newFiles = [...uploadedFiles, file];
-    setUploadedFiles(newFiles);
-    onChange({ files: newFiles });
+    if (file.cdnUrl && file.uuid) {
+      const newFiles = [...uploadedFiles, file];
+      setUploadedFiles(newFiles);
+      onChange({ files: newFiles }); // sync ke parent
+    }
   };
 
   const handleRemoveFile = (uuid: string) => {
-    const updatedFiles = fileEntry.files.filter((file) => file.uuid !== uuid);
-    onChange({ files: updatedFiles });
+    const updatedFiles = uploadedFiles.filter((file) => file.uuid !== uuid);
     setUploadedFiles(updatedFiles);
+    onChange({ files: updatedFiles }); // sync ke parent
   };
 
   return (
@@ -41,14 +50,21 @@ const FileUploader: React.FC<IFileUploaderProps> = ({
       />
 
       <div className="grid grid-cols-2 gap-4 mt-8">
-        {fileEntry.files.map((file) => (
-          <div className="relative" key={file.uuid}>
-            {file.cdnUrl && (
+        {uploadedFiles.length === 0 && (
+          <p className="text-sm text-gray-500 col-span-2">
+            No images uploaded.
+          </p>
+        )}
+        {uploadedFiles.map((file) => (
+          <div className="relative" key={file.uuid || Math.random()}>
+            {file.cdnUrl ? (
               <img
-                src={`${file.cdnUrl}/-/format/webp/-/quality/smart/-/strecth/fill/`}
+                src={`${file.cdnUrl}/-/preview/-/format/webp/`}
                 alt="Preview"
                 className="w-full h-auto rounded"
               />
+            ) : (
+              <p className="text-sm text-red-500">No preview available</p>
             )}
             <button
               type="button"
