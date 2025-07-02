@@ -42,7 +42,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = () => {
       };
       console.log("The final post is: ", newPost);
       await createPost(newPost);
-      navigate("/");
+      navigate("/myphotos");
     } else {
       navigate("/login");
     }
@@ -77,7 +77,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = () => {
                   </Label>
                   <FileUploader fileEntry={fileEntry} onChange={setFileEntry} />
                 </div>
-                <Button className="mt-8 w-32" type="submit">
+                <Button className="mt-8 w-32 cursor-pointer" type="submit">
                   Post
                 </Button>
               </form>
